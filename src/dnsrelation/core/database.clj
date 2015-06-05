@@ -10,22 +10,24 @@
   (let [result (nn/query conn index (str index ":" dns))]
     (if (empty? result)
       nil
-      (:id ((into [] result) 1))
+      (:id ((into [] result) 0))
       )
     ))
 
 (defn create-dns
   [dns index]
-  (let [node (nn/create conn dns)]
-    (nn/add-to-index conn (:id node) index index domain)
-    node
+  (let [check (search-repeat dns index)]
+    (if (nil? check)
+      (let [node (nn/create conn {index dns})] (nn/add-to-index conn (:id node) index index dns) node)
+      (nn/get conn check)
+      )
     )
   )
 
 (defn create-doamin-ip
   [doamin ip]
   (let [d (create-dns domain "domain")
-       i (nn/create ip "ip")]
+       i (create-dns ip "ip")]
   (nrl/create conn d i :map)
     )
   )
