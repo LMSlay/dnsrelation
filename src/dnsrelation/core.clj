@@ -1,7 +1,21 @@
 (ns dnsrelation.core
-  (:gen-class))
+  (:require [clojurewerkz.neocons.rest :as nr]
+            [clojurewerkz.neocons.rest.nodes :as nn]
+            [clojurewerkz.neocons.rest.cypher :as cy]))
+
+(def conn  (nr/connect "http://localhost:7474/db/data/"))
+
+(defn search-repeat
+  [dns index]
+  (let [result (nn/query conn index (str index ":" dns))]
+    (if (empty? result)
+      nil
+      (:id ((into [] result) 1))
+    )
+  ))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  ;; creates a node wit two properties
+  (print (search-repeat "jo22e" "by-username"))
+  )
