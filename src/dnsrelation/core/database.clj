@@ -24,11 +24,13 @@
     )
   )
 
-(defn create-doamin-ip
-  [doamin ip]
+(defn create-domain-ip
+  [domain ip]
   (let [d (create-dns domain "domain")
        i (create-dns ip "ip")]
+    (print (str "insert node" domain " " ip "\n"))
   (nrl/create conn d i :map)
     )
   )
+
 

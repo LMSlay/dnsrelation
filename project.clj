@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
 		             [clojurewerkz/neocons "3.0.0"]]
-  :main ^:skip-aot dnsrelation.core
+  :jvm-opts ["-Xms1024m" "-Xmx2024m"]
+  :main ^:skip-aot dnsrelation.load
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

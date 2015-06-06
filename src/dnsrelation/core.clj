@@ -1,14 +1,9 @@
 (ns dnsrelation.core
-  (:require [clojurewerkz.neocons.rest :as nr]
-            [clojurewerkz.neocons.rest.nodes :as nn]
-            [clojurewerkz.neocons.rest.cypher :as cy]))
+  (:require [dnsrelation.core.database :as db]
+            [load as ld]))
 
-(def conn  (nr/connect "http://localhost:7474/db/data/"))
-
-
-
-(defn -main
+(defn tests
   [& args]
   ;; creates a node wit two properties
-  (print (create-dns "jo22e" "username"))
+  (ld/data-load (ld/path 0) ld/dns-deal-test)
   )
