@@ -37,9 +37,16 @@
       (deal line)))
   )
 
-(defn -main
-  [& args]
+(defn getNode
+  [nums]
+  (db/get conn nums)
+  (first (nrl/outcoming-for conn node :map []))
+  )
+
+(defn main
+  []
   ;; creates a node wit two properties
-  (data-load-smail (str "/Users/slay/project/clojure/dnsrelation/src/dnsrelation/" (path 0)) dns-deal-test)
+;;  (data-load-smail (str "/Users/slay/project/clojure/dnsrelation/src/dnsrelation/" (path 0)) dns-deal-test)
 ;;  (db/create-domain-ip "wwwwww" "hhhhh")
+  (print 1)
   )

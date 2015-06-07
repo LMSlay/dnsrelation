@@ -34,3 +34,24 @@
   )
 
 
+(defn get-in-node
+  [nums]
+  (let [node (nn/get conn nums)
+        in (nrl/incoming-for conn node :map [])
+        out (nrl/outgoing-for conn node :map [])]
+    (if (empty? in)
+      (set (map (fn [x](:type x)) out))
+      (set (map (fn [x](:type x)) in)))
+  ))
+
+(defn prop-set
+  [start end]
+
+  )
+
+(defn add-link
+  [start end]
+
+  )
+
+
