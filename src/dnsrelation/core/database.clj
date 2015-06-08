@@ -1,7 +1,8 @@
 (ns dnsrelation.core.database
   (:require [clojurewerkz.neocons.rest :as nr]
             [clojurewerkz.neocons.rest.relationships :as nrl]
-            [clojurewerkz.neocons.rest.nodes :as nn]))
+            [clojurewerkz.neocons.rest.nodes :as nn])
+  )
 
 (def conn  (nr/connect "http://localhost:7474/db/data/"))
 
@@ -39,19 +40,20 @@
   (let [node (nn/get conn nums)
         in (nrl/incoming-for conn node :map [])
         out (nrl/outgoing-for conn node :map [])]
-    (if (empty? in)
-      (set (map (fn [x](:type x)) out))
-      (set (map (fn [x](:type x)) in)))
-  ))
+        in
+;;    (if (empty? in)
+;;      (set (map (fn [x](:type x)) out))
+;;      (set (map (fn [x](:type x)) in))
+      ))
 
-(defn prop-set
-  [start end]
-
+(defn get-link
+  [id key]
+  (set (nn/traverse conn id key []))
   )
 
 (defn add-link
-  [start end]
-
+  [start end link]
+  (nrl/create conn start end link)
   )
 
 
